@@ -14,24 +14,29 @@
 					<div class="my-card mt-3">
 
 						<div th:if="${session.message}"
-							th:classappend="${session.message.type}"
-							class="alert" role="alert">
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
 							<p class="text-center" th:text="${session.message.content}"></p>
-							<th:block th:text="${#session.removeAttribute('message')}">	 </th:block>
-							</div>
+							<th:block th:text="${#session.removeAttribute('message')}">
+							</th:block>
+						</div>
 
 						<h1 class="text-center">Register Here</h1>
 
-						<form th:action="@{/do_register}" method="post"
+						<form novalidate th:action="@{/do_register}" method="post"
 							th:object="${user}">
 							<!-- name field -->
 							<div class="mb-3">
 								<label for="exampleInputUserName" class="form-label">User
-									Name</label> <input type="text" class="form-control" id="name_field"
+									Name</label> <input type="text"
+									class="form-control" id="name_field"
+									th:classappend="${#fields.hasErrors('user_name')?'is-invalid':''}"
 									aria-describedby="emailHelp" name="user_name"
 									placeholder="Enter User Name" required
 									th:value="${user.user_name}">
 							</div>
+
+							<div class="text-danger" th:each="e : ${#fields.errors('user_name')}" th:text="${e}"></div>
 							<!-- email field -->
 							<div class="mb-3">
 								<label for="exampleInputEmail1" class="form-label">Email
@@ -50,7 +55,7 @@
 							<!-- about field -->
 							<div class="mb-3 form-group">
 								<textarea rows="10" placeholder="Enter Something About Yourself"
-									class="form-control" th:value="${user.user_about}"
+									class="form-control" th:text="${user.user_about}"
 									name="user_about"></textarea>
 							</div>
 

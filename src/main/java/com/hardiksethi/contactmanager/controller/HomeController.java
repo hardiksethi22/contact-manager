@@ -1,10 +1,12 @@
 package com.hardiksethi.contactmanager.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,17 +46,24 @@ public class HomeController {
 
 	/* Handling sign-up request */
 	@PostMapping("/do_register")
-	public String registerUser(@ModelAttribute("user") User user,
+	public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult bindingresult,
 			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model,
 			HttpSession httpsession) {
 		try {
 			if (!agreement) {
 				throw new Exception("Agreement not accepted");
 			}
+			if (bindingresult.hasErrors()) {
+
+				System.out.println(bindingresult.toString());
+				model.addAttribute("user", user);
+				return "sign-up";
+			}
 			user.setUser_role("ROLE_USER");
 			user.setUser_enabled(true);
 			user.setUser_image_url("default.png");
 			model.addAttribute("user", new User());
+			System.out.println(user);
 			userdao.save(user);
 			httpsession.setAttribute("message", new Message("Successfully Registered!!", "alert-primary"));
 		} catch (Exception e) {
