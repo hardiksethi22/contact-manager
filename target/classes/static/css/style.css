@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+body {
+	background: teal;
+}
+
+.bg-primary {
+	background: #4fc3f7;
+}
+
+.banner {
+	width: 100%;
+	height: 93vh;
+	background: linear-gradient(rgba(0,0,0,.6) , rgba(0,0,0,.6)), url(../images/backgroud.webp);
+	background-size: cover;
+	color: white;	 
+}
+
+.my-card {
+	padding :20px;
+	background: #ffffff;
+}
