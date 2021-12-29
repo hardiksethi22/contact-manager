@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -25,8 +28,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
+	@NotBlank(message = "User Name can't be null")
+	@Size(min = 2, max= 20 , message="min 2 and max 20 characters are allowed")
 	private String user_name;
 	@Column(unique = true)
+	@Email
 	private String user_email;
 	private String user_role;
 	private String user_password;
