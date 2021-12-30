@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+</head>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<body>
+
+	<section>
+		<div class="container">
+			<div class="row ">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card mt-3">
+
+						<form th:action="@{/signin}" action="/about" method="post">
+							<div class="mb-3">
+								<h1 class="text-center">Login Page</h1>
+								<div th:if="${param.error}" class="alert alert-danger">
+									Invalid email or password</div>
+								<div th:if="${param.logout}" class="alert alert-primary">
+									Successfully logged out</div>
+
+								<label for="exampleInputEmail1" class="form-label">Email
+									address</label> <input type="email" class="form-control"
+									id="exampleInputEmail1" aria-describedby="emailHelp"
+									name="username">
+
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Password</label>
+								<input type="password" class="form-control"
+									id="exampleInputPassword1" name="password">
+							</div>
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
