@@ -41,7 +41,7 @@ public class User {
 	@Column(length = 500)
 	private String user_about;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	@JsonBackReference
 	private List<Contact> contact_list = new ArrayList<Contact>();
 	
