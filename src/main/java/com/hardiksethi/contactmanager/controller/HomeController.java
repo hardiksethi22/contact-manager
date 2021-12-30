@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +23,9 @@ public class HomeController {
 
 	@Autowired
 	private UserDao userdao;
-
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	/* Home Page */
 	@GetMapping("/")
 	public String home(Model model) {
@@ -43,7 +47,14 @@ public class HomeController {
 		model.addAttribute("user", new User());
 		return "sign-up";
 	}
-
+	
+	/* Sign In Page */
+	@GetMapping("/signin")
+	public String signin(Model model) {
+		model.addAttribute("title", "Contact Manager - Sign In");
+		return "sign-in";
+	}
+	
 	/* Handling sign-up request */
 	@PostMapping("/do_register")
 	public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult bindingresult,
@@ -62,6 +73,7 @@ public class HomeController {
 			user.setUser_role("ROLE_USER");
 			user.setUser_enabled(true);
 			user.setUser_image_url("default.png");
+			user.setUser_password(passwordEncoder.encode(user.getUser_password()));
 			model.addAttribute("user", new User());
 			System.out.println(user);
 			userdao.save(user);

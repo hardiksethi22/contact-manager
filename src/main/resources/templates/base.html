@@ -13,6 +13,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
+
 <title th:text="${title}"></title>
 </head>
 <body>
@@ -20,7 +21,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Contact Manager</a>
+			<a class="navbar-brand" th:href="@{/}">Contact Manager</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -32,7 +33,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" th:href="@{/}">Home</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/user/index}">Login</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/signup}">Sign
 							Up</a></li>
 				</ul>
